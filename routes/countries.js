@@ -11,26 +11,18 @@ router.get(`/`, async (req, res) => {
     res.status(200).send(countryList)
 })
 
-router.get('/:id', async (req, res) => {
-    const country = await Country.findByName(req.params.name)
-
-    if (!category) {
-        res.status(500).json({ message: 'The category with the given ID was not found.' })
-    }
-    res.status(200).send(category)
-})
-
 router.post('/', async (req, res) => {
-    let category = new Category({
+    let countro = new Country({
+        country: req.body.country,
         name: req.body.name,
-        icon: req.body.icon,
-        color: req.body.color
+        latitude: req.body.latitude,
+        longitude: req.body.longitude
     })
-    category = await category.save()
+    countro = await countro.save()
 
-    if (!category) return res.status(400).send('the category cannot be created!')
+    if (!countro) return res.status(400).send('the country cannot be created!')
 
-    res.send(category)
+    res.send(countro)
 })
 
 router.put('/:id', async (req, res) => {

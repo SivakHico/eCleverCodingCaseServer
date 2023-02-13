@@ -17,7 +17,7 @@ app.options('*', cors())
 app.use(express.json())
 app.use(morgan('tiny'))
 
-app.use(`/countries`, countriesRoutes)
+app.use('/', countriesRoutes)
 
 const getdata = async () => {
     const response = await fetch(API)
