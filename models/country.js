@@ -3,11 +3,11 @@ import mongoose from 'mongoose'
 const countryListSchema = mongoose.Schema({
     country: {
         type: String,
-        unique: true
+       
     },
     name: {
         type: String,
-        unique: true
+       
     },
     latitude: {
         type: Number

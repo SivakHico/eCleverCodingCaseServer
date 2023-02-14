@@ -30,13 +30,15 @@ const getdata = async () => {
             longitude: item?.capitalInfo?.latlng?.[1]
         }
     })
+    console.log(countryList)
     try {
-        if (countryList.length > 0) {
-            await country.insertMany(countryList)
-            console.log('Data Inserted')
-        } else {
-            console.log('Data not Inserted')
+        const count = await country.countDocuments()
+        if (count > 0) {
+            await country.deleteMany()
+            console.log('Data Deleted')
         }
+        await country.insertMany(countryList)
+        console.log('Data Inserted')
     } catch (err) {
         if (err.code === 11000) {
             console.log('Data already inserted')
