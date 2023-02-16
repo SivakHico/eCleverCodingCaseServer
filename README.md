@@ -1,3 +1,2 @@
-# -beShop-server
-# be-shop-server
-# eCleverCodingCaseServer
+npm install
+npm start
