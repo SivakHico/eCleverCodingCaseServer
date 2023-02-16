@@ -25,29 +25,31 @@ router.post('/', async (req, res) => {
     res.send(countro)
 })
 
-router.put('/:id', async (req, res) => {
-    const category = await Category.findByIdAndUpdate(
+router.put('/edit-country/:id', async (req, res) => {
+    const countro = await Country.findByIdAndUpdate(
         req.params.id,
         {
+            country: req.body.country,
             name: req.body.name,
-            icon: req.body.icon || category.icon,
-            color: req.body.color
+            latitude: req.body.latitude,
+            longitude: req.body.longitude
         },
         { new: true }
     )
 
-    if (!category) return res.status(400).send('the category cannot be created!')
+    if (!countro) return res.status(400).send('the country cannot be Updated!')
+    console.log(countro)
 
-    res.send(category)
+    res.send(countro)
 })
 
-router.delete('/:id', (req, res) => {
-    Category.findByIdAndRemove(req.params.id)
-        .then((category) => {
-            if (category) {
-                return res.status(200).json({ success: true, message: 'the category is deleted!' })
+router.delete('/delete-country/:id', (req, res) => {
+    Country.findByIdAndRemove(req.params.id)
+        .then((country) => {
+            if (country) {
+                return res.status(200).json({ success: true, message: 'the country is deleted!' })
             } else {
-                return res.status(404).json({ success: false, message: 'category not found!' })
+                return res.status(404).json({ success: false, message: 'country not found!' })
             }
         })
         .catch((err) => {
